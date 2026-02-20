@@ -10,7 +10,7 @@ const randomFromArray = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.leng
 
 const severityLevels: Report['severity'][] = ['low', 'medium', 'high', 'critical'];
 const zones = ['Zone A', 'Zone B', 'Zone C', 'Zone D'];
-const statuses: Report['status'][] = ['active', 'resolved'];
+const statuses: Report['status'][] = ['active', 'pending' , 'resolved'];
 
 /**
  * Start automatic report generation.
@@ -18,7 +18,7 @@ const statuses: Report['status'][] = ['active', 'resolved'];
  * @param intervalMs Interval in milliseconds (default 2000)
  * @returns intervalId
  */
-export function startAutoGeneration(callback: (reports: Report[]) => void, intervalMs = 2000) {
+export function startAutoGeneration(callback: (reports: Report[]) => void, intervalMs = 1000) {
   generationInterval = setInterval(() => {
     const newReports: Report[] = [];
 
