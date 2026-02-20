@@ -87,7 +87,7 @@ export default function Dashboard() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `yatraflow-reports-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `roadsafeanalytics-reports-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
 
     toast.success('Reports exported successfully');
