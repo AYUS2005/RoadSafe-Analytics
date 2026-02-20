@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { Shield, AlertTriangle, BarChart3, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,9 +22,11 @@ export default function Landing() {
   const { login, signup, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+useEffect(() => {
   if (isAuthenticated) {
     navigate('/dashboard');
   }
+}, [isAuthenticated, navigate]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +43,8 @@ export default function Landing() {
 
     try {
       const success = authMode === 'login' 
-        ? await login(email, password, role)
-        : await signup(email, password, name, role);
+        ? await login(email, password,)
+        : await signup(email, password, name,);
 
       if (success) {
         toast.success(`${authMode === 'login' ? 'Logged in' : 'Account created'} successfully!`);
@@ -59,7 +63,7 @@ export default function Landing() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-foreground">YatraFlow</span>
+            <span className="text-2xl font-bold text-foreground">RoadSafe Analytics</span>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
@@ -149,9 +153,9 @@ export default function Landing() {
 <section className="py-20 bg-background/50">
   <div className="container mx-auto px-4">
     <div className="text-center mb-12">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">About YatraFlow</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">About RoadSafe Analytics</h2>
       <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-        Learn how YatraFlow revolutionizes road safety management with real-time monitoring, intelligent insights, and seamless reporting.
+        Learn how RoadSafe Analytics revolutionizes road safety management with real-time monitoring, intelligent insights, and seamless reporting.
       </p>
     </div>
 
@@ -191,7 +195,7 @@ export default function Landing() {
       <div>
         <div className="flex items-center gap-2 mb-4">
           <Shield className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold">YatraFlow</span>
+          <span className="text-xl font-bold">RoadSafe Analytics</span>
         </div>
         <p className="text-muted-foreground mb-4">
           Making roads safer through intelligent monitoring and real-time analytics.
@@ -257,7 +261,7 @@ export default function Landing() {
     </div>
 
     <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-      <p>&copy; 2025 YatraFlow. All rights reserved.</p>
+      <p>&copy; 2025 RoadSafe Analytics. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -310,19 +314,7 @@ export default function Landing() {
                 required
               />
             </div>
-            <div className="space-y-2">
-              <Label>Account Type</Label>
-              <RadioGroup value={role} onValueChange={(v) => setRole(v as 'admin' | 'user')}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="user" id="user" />
-                  <Label htmlFor="user" className="font-normal">User (View & Report)</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="admin" id="admin" />
-                  <Label htmlFor="admin" className="font-normal">Admin (Full Access)</Label>
-                </div>
-              </RadioGroup>
-            </div>
+         
             <Button type="submit" className="w-full">
               {authMode === 'login' ? 'Login' : 'Sign Up'}
             </Button>
